@@ -107,3 +107,11 @@ print("==>", count_vector_in_matrix(json_input_vec, json_input_bmp))
 print(" ::: \n", json_input_vec, "\n ::: \n", json.loads(json_input_bmp_other))
 print("==>", find_vector_in_bmp_json(json_input_vec, json_input_bmp_other))
 print("==>", count_vector_in_matrix(json_input_vec, json_input_bmp_other))
+
+print("Find from file:")
+print(" ::: ", json_input_vec, " :::")
+print("==>", count_vector_in_file(json_input_vec))
+
+
+
+

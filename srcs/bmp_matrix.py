@@ -14,6 +14,11 @@ g_range_max = 15
 
 # # #
 
+def	count_vector_in_file(vector):
+	with open("bitmap.json") as file:
+		fullstr = file.read()
+	return count_vector_in_matrix(vector, fullstr)
+
 def count_vector_in_matrix(vector, matrix):
 	return str(find_vector_in_bmp_json(vector, matrix))
 
