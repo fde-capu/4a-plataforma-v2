@@ -5,12 +5,15 @@
 
 import numpy as np
 import json
+import sys
+import getopt
 from op import *
 
 # # #
 
 g_range_min = 0
 g_range_max = 15
+g_verbose_mode = 1
 
 # # #
 
@@ -23,7 +26,7 @@ def count_vector_in_matrix(vector, matrix):
 	return str(find_vector_in_bmp_json(vector, matrix))
 
 def	intro():
-	print("Hello, bmp_matrix! by fde-capu")
+	op.print_if_true("Hello, bmp_matrix! by fde-capu", g_verbose_mode)
 
 def vector_compare(vec_a, vec_b):
 	if len(vec_a) == 0 or len(vec_b) == 0: return 0
@@ -60,7 +63,7 @@ class	bmp(object):
 				if len(x) == 0:
 					raise AttributeError
 		except AttributeError:
-			print("Matrix or column empty.")
+			op.print_if_true("Matrix or column empty.", g_verbose_mode)
 		else:
 			self.matrix = np.array(bmp)
 			if self.matrix.ndim > 1:
@@ -68,7 +71,7 @@ class	bmp(object):
 			else:
 				self.n = 1
 				self.m = len(self.matrix)
-			if not silent: intro(); print(self)
+			if not silent: intro(); op.print_if_true(self, g_verbose_mode)
 	def __str__(self):
 		return self.show_me()
 	def show_me(self):
@@ -102,16 +105,26 @@ class	needle(object):
 			for r in vector:
 				if r < g_range_min or r > g_range_max: raise IndexError
 		except AttributeError:
-			print("Vector is empty.")
+			op.print_if_true("Vector is empty.", g_verbose_mode)
 		except IndexError:
-			print("error: vector out of range (" + str(g_range_min) \
-				+ " to " + str(g_range_max) + ").")
+			op.print_if_true("error: vector out of range (" + str(g_range_min) \
+				+ " to " + str(g_range_max) + ").", g_verbose_mode)
 		else:
 			self.vector = np.array(vector)
 			self.m = len(self.vector)
 		finally:
-			if not silent: print ("Built " + op.xtoa(self.vector))
+			if not silent: op.print_if_true ("Built " + op.xtoa(self.vector), \
+				g_verbose_mode)
 	def __str__(self):
 		return self.show_me()
 	def show_me(self):
 		return op.xtoa(self.vector)
+
+# # #
+
+if len(sys.argv) != 1:
+	g_verbose_mode = 0
+	vector = sys.argv[1:]
+	vector = "".join(vector)
+	count = count_vector_in_file(vector)
+	print(count, end = "")

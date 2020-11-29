@@ -6,7 +6,9 @@
 
 from bmp_matrix import *
 from op import *
+import os
 import json
+import subprocess
 
 # # #
 
@@ -40,7 +42,7 @@ test_needle = [ \
 	[7, 8, 16], \
 	[7, 8, 5], \
 	[7, 5], \
-	[]
+	[] \
 	]
 
 # # #
@@ -112,6 +114,9 @@ print("Find from file:")
 print(" ::: ", json_input_vec, " :::")
 print("==>", count_vector_in_file(json_input_vec))
 
-
-
-
+print("Find from CLI: plain list:")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py " + str(n)
+	print("`" + cmd + "`")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(">>", test)

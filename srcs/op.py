@@ -9,3 +9,5 @@ class	op():
 		return str(self)
 	def zero_index(self):
 		return (self[1] - 1, self[0] - 1)
+	def print_if_true(string, boolean):
+		if boolean: print(string)
