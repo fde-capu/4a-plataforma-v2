@@ -125,6 +125,9 @@ class	needle(object):
 if len(sys.argv) != 1:
 	g_verbose_mode = 0
 	vector = sys.argv[1:]
-	vector = "".join(vector)
+	for i in range(len(vector)):
+		vector[i] = vector[i].strip("\"\',[]")
+	vector = ",".join(vector)
+	vector = "[" + vector + "]"
 	count = count_vector_in_file(vector)
 	print(count, end = "")

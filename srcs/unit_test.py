@@ -116,7 +116,46 @@ print("==>", count_vector_in_file(json_input_vec))
 
 print("Find from CLI: plain list:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py " + str(n)
-	print("`" + cmd + "`")
+	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(">>", test)
+	print(" >>", test)
+
+print("Find from CLI: plain list, no brackets:")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	cmd = cmd.replace("[", "").replace("]", "")
+	print("`" + cmd + "`", end = "")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(" >>", test)
+
+print("Find from CLI: plain list, no brackets, no comma:")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
+	print("`" + cmd + "`", end = "")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(" >>", test)
+
+print("Find from CLI: in string list (json):")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	print("`" + cmd + "`", end = "")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(" >>", test)
+
+print("Find from CLI: plain list, no brackets:")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	cmd = cmd.replace("[", "").replace("]", "")
+	print("`" + cmd + "`", end = "")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(" >>", test)
+
+print("Find from CLI: plain list, no brackets, no comma:")
+for n in test_needle:
+	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
+	print("`" + cmd + "`", end = "")
+	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	print(" >>", test)
