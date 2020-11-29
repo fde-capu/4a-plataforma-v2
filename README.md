@@ -1,3 +1,8 @@
-# vivo-4a-plataforma-v2
-Teste para Desenvolvedores
+# 4a-plataforma-v2
+Teste de Estudo em Desenvolvimento Python
 por fde-capu
+
+Estilo de escrita: livre.
+
+1. Contagem de vetor em uma matriz.
+	Use: `count_vector_in_matrix(json_vector, json_matrix)`
