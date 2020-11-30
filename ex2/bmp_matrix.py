@@ -14,12 +14,19 @@ from op import *
 g_range_min = 0
 g_range_max = 15
 g_verbose_mode = 1
+global g_ref_file
 
 # # #
 
 def	count_vector_in_file(vector):
-	with open("/app/bitmap.json") as file:
-		fullstr = file.read()
+	g_ref_file = "/app/bitmap.json"
+	try:
+		with open(g_ref_file) as file:
+			fullstr = file.read()
+	except:
+		g_ref_file = g_ref_file.replace("/app/", "")
+		with open(g_ref_file) as file:
+			fullstr = file.read()
 	return count_vector_in_matrix(vector, fullstr)
 
 def count_vector_in_matrix(vector, matrix):

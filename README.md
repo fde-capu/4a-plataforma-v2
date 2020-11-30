@@ -24,8 +24,9 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 
 `cd ex2` :: Use:
 
-- `build.sh`: cria um container escutando a porta 5000.
+- `setup.sh`: cria um container escutando a porta 5000.
 - `test.sh`: faz algumas chamadas `curl` no modelo `curl -d "2 5 7" localhost:5000`. A string referência pode ter as mesmas variações que no Ex. 1.
+- `login.sh`: efetual login root no container, via Docker.
 
 ### Ex 3. Faça algumas estatísticas de uma corrida de super-heróis.
 
