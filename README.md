@@ -25,4 +25,4 @@ Use:
 Use:
 
 - `build.sh`: cria um container escutando a porta 5000.
-- `test.sh`: imprime processos, logs, faz algumas chamadas `curl` no modelo `curl -d "2 5 7" localhost:5000`. A string referência pode ter as mesmas variações que no Ex. 1.
+- `test.sh`: faz algumas chamadas `curl` no modelo `curl -d "2 5 7" localhost:5000`. A string referência pode ter as mesmas variações que no Ex. 1.
