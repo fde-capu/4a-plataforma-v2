@@ -20,7 +20,6 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 
 	(Aspas duplas `""` e simples `''` são aceitas.)
 
-
 ### Ex 2. Programa do Ex. 1 transformado em API Restful.
 
 `cd ex2` :: Use:
