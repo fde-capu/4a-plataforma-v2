@@ -86,8 +86,6 @@ df[HID] = df[SUP].apply(lambda _: str(_).split('–')[0])
 df[NAM] = df[SUP].apply(lambda _: str(_).split('–')[1])
 df.drop([SUP], axis = 1, inplace = True)
 
-print (df)
-print (df.info())
 print ("\n---------\n")
 print ("\nPosição de chegada:")
 print (posicao_de_chegada(df))
