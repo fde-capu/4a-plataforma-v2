@@ -5,6 +5,7 @@
 # # #
 
 from bmp_matrix import *
+g_ref_file = "bitmap.json"
 from op import *
 import os
 import json
