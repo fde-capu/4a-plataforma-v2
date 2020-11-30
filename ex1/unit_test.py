@@ -24,8 +24,10 @@ json_input_bmp_other = '[				\
 	[	1,	0,	15,	0,	4,	4,	3	],	\
 	[	7,	8,	7,	5,	2,	5,	7	],	\
 	[	3,	1,	0,	15,	7,	8,	5	],	\
-	[	0,	4,	4,	8,	7,	5,	7	]	\
+	[	0,	4,	4,	8,	7,	5,  7	]	\
 	]'
+
+json_inconsistent_bmp = '[[1], [1, 2]]'
 
 json_input_vec = '[2, 5, 7]'
 
@@ -56,6 +58,10 @@ print("\nUnit test")
 print ("\nLoading local bitmap (no error expected). Raw.")
 local_bmp = bmp(json.loads(json_input_bmp), g_not_silent)
 local_bmp_other = bmp(json.loads(json_input_bmp_other), g_not_silent)
+print (" Done.")
+
+print ("Try inconsistend matrix:")
+local_inconsistent = bmp(json.loads(json_inconsistent_bmp), g_not_silent)
 print (" Done.")
 
 print ("\nLoading local vector needle (no error expected). Raw.")
