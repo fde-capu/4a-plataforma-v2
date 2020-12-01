@@ -3,18 +3,31 @@
 # # #
 
 import sys
+import re
 from class_needle import *
 from counter import *
 
-g_verbose_mode = 1
-global g_ref_file
+def	validate_or_die(vec):
+	vec = [re.sub(',', '', v) for v in vec]
+	vec_full = ",".join(vec)
+	vec_full = re.sub('[ \'\"]', '', vec_full)
+	if not re.compile("\[|\]").search(vec_full):
+		vec_full = "[" + vec_full + "]"
+	try:
+		validate = json.loads(vec_full)
+	except:
+		sys.exit("Format error.")
+	if type(validate) != list \
+	or len(validate) == 0 \
+	or validate != [v for v in validate if type(v) == int and 0 <= v and v <= 15]:
+		sys.exit("Not valid.")
+	return vec_full
 
 if len(sys.argv) != 1:
-	g_verbose_mode = 0
-	vector = sys.argv[1:]
-	for i in range(len(vector)):
-		vector[i] = vector[i].strip("\"\',[]")
-	vector = ",".join(vector)
-	vector = "[" + vector + "]"
+	vector = validate_or_die(sys.argv[1:]);
+	if not re.compile("\[|\]").search(vector):
+		vector = "[" + vector + "]"
 	count = count_vector_in_file(vector)
 	print(count, end = "")
+else:
+	print("", end = "")

@@ -8,13 +8,13 @@ from class_needle import *
 from class_matrix import *
 
 def	count_vector_in_file(vector):
-	g_ref_file = "/app/bitmap.json"
+	ref_file = "/app/bitmap.json"
 	try:
-		with open(g_ref_file) as file:
+		with open(ref_file) as file:
 			fullstr = file.read()
 	except:
-		g_ref_file = g_ref_file.replace("/app/", "")
-		with open(g_ref_file) as file:
+		ref_file = ref_file.replace("/app/", "")
+		with open(ref_file) as file:
 			fullstr = file.read()
 	return count_vector_in_matrix(vector, fullstr)
 
@@ -30,9 +30,9 @@ def find_vector_in_bmp(needle, bitmap):
 	if not needle.m: return 0
 	found = 0
 	if bitmap.n > 1:
-		found += find_vector_in_bmp(needle, bmp(bitmap.matrix[1:,:]))
+		found += find_vector_in_bmp(needle, matrix_init(bitmap.matrix[1:,:]))
 	if needle.m < bitmap.m:
-		bmp_extract = bmp([bitmap.matrix[0,1:]])
+		bmp_extract = matrix_init([bitmap.matrix[0,1:]])
 		found += find_vector_in_bmp(needle, bmp_extract)
 	extract = bitmap.get_vector_at_x_y((1, 1), needle.m)
 	found += vector_compare(needle.vector, extract)
@@ -41,5 +41,5 @@ def find_vector_in_bmp(needle, bitmap):
 def find_vector_in_bmp_json(json_vector, json_matrix):
 	return find_vector_in_bmp( \
 		needle_init(np.array(json.loads(json_vector))), \
-		bmp(np.array(json.loads(json_matrix))) \
+		matrix_init(np.array(json.loads(json_matrix))) \
 		)

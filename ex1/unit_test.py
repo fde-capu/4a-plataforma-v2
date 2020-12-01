@@ -1,11 +1,9 @@
 # # #
 # # # unit test for
 # # # find a vector in a bitmap . fde-capu . 2012
-# # # written for Python 3.7.3
 # # #
 
 from main import *
-g_ref_file = "bitmap.json"
 from op import *
 import os
 import json
@@ -13,49 +11,37 @@ import subprocess
 
 # # #
 
-json_input_bmp = '[		\
-	[11,  7,  5,  9],	\
-	[ 6,  1,  0,  2],	\
-	[10, 15,  3,  8]	\
-	]'
-
-json_input_bmp_other = '[				\
-	[	2,	5,	7,	9,	1,	0,	15	],	\
-	[	6,	3,	2,	5,	7,	8,	5	],	\
-	[	1,	0,	15,	0,	4,	4,	3	],	\
-	[	7,	8,	7,	5,	2,	5,	7	],	\
-	[	3,	1,	0,	15,	7,	8,	5	],	\
-	[	0,	4,	4,	8,	7,	5,  7	]	\
-	]'
-
-json_inconsistent_bmp = '[[1], [1, 2]]'
-
-json_input_vec = '[2, 5, 7]'
-
-test_get_element = [(2, 1), (7, 7), (2, -3), (0, 4), (4, 3), (1, 3)]
-
-vector_lengths = [-2, 0, 1, 2, 3, 7, 4]
-
 test_needle = [ \
 	[3], \
-	[[5, 7]], \
+	[5, 7], \
 	[0, 4, 4], \
-	[5, -1, 7], \
 	[1, 0, 15], \
-	[7, 8, 16], \
 	[7, 8, 5], \
 	[7, 5], \
-	[] \
-	]
+]
+
+answ_needle = [ \
+	3, \
+	4, \
+	2, \
+	3, \
+	2, \
+	2, \
+	0,
+]
+
 wrong_formats = [ \
 	"o 4 4", \
 	"[[2, 5]]", \
 	"[5, , 7]", \
 	"[7 9, 1", \
 	"5 ] 2", \
+	[7, 8, 16], \
 	"[ 5 , [ 7 ]", \
-	"7 9, 1", \
-	"", \
+	[5, -1, 7], \
+	[[5, 7]], \
+	[], \
+	"[]", \
 ]
 
 # # #
@@ -80,58 +66,91 @@ def		alert(str):
 
 print("\nUnit test")
 
-print("Find from CLI: wrong formatting (error expected):")
+print("\nFind from CLI: wrong formatting (error expected), double quotes:")
 for n in wrong_formats:
-	cmd = "python3 main.py \"" + n + "\""
+	test = ""
+	cmd = "python3 main.py \"" + str(n) + "\""
 	print("`" + cmd + "`", end = " ", flush = True)
 	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
 	except:	test = "OK"
 	else:	alert(test)
 
-exit()
-
-print("Find from CLI: plain list:")
-for n in test_needle:
+print("\nFind from CLI: wrong formatting (error expected), no quotes:")
+for n in wrong_formats:
+	test = ""
 	cmd = "python3 main.py " + str(n) + ""
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	test = "OK"
+	else:	alert(test)
 
-print("Find from CLI: plain list, no brackets:")
-for n in test_needle:
+print("\nFind from CLI: plain list:")
+for i, n in enumerate(test_needle):
+	test = ""
+	cmd = "python3 main.py " + str(n) + ""
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	ans = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == ans:
+		print(" >>", answ_needle[i])
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + ans)
+
+print("\nFind from CLI: plain list, no brackets:")
+for i, n in enumerate(test_needle):
 	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "")
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == test:
+		print(" >>", test)
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + test)
 
-print("Find from CLI: plain list, no brackets, no comma:")
-for n in test_needle:
+print("\nFind from CLI: plain list, no brackets, no comma:")
+for i, n in enumerate(test_needle):
 	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == test:
+		print(" >>", test)
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + test)
 
-print("Find from CLI: in string list (json):")
-for n in test_needle:
+print("\nFind from CLI: in string list (json):")
+for i, n in enumerate(test_needle):
 	cmd = "python3 main.py \"" + str(n) + "\""
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == test:
+		print(" >>", test)
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + test)
 
-print("Find from CLI: plain list, no brackets:")
-for n in test_needle:
+print("\nFind from CLI: plain list, no brackets:")
+for i, n in enumerate(test_needle):
 	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "")
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == test:
+		print(" >>", test)
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + test)
 
-print("Find from CLI: plain list, no brackets, no comma:")
-for n in test_needle:
+print("\nFind from CLI: plain list, no brackets, no comma:")
+for i, n in enumerate(test_needle):
 	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
-	print("`" + cmd + "`", end = "")
-	test = subprocess.check_output(cmd.split()).decode('utf-8')
-	print(" >>", test)
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	alert("Runtime error.")
+	if str(answ_needle[i]) == test:
+		print(" >>", test)
+	else:
+		alert("Fail: " + str(answ_needle[i]) + ": got " + test)
