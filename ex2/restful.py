@@ -5,7 +5,7 @@ import re
 
 def	treat_many_ways(full_str):
 	vector = full_str.decode('utf-8')
-	vector = re.sub('["\"\'\,\[\]\ ]+', " ", vector)
+	vector = re.sub('[\"\'\,\[\]\ ]+', " ", vector)
 	vector = vector.strip(" ")
 	vector = re.sub(" ", ",", vector)
 	vector = "[" + vector + "]"
