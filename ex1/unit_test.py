@@ -4,7 +4,7 @@
 # # # written for Python 3.7.3
 # # #
 
-from bmp_matrix import *
+from main import *
 g_ref_file = "bitmap.json"
 from op import *
 import os
@@ -74,15 +74,15 @@ class bcolors:
 
 # # #
 
-def alert(str):
-	print (bcolors.WARNING + ">>> " + str + " <<<" + bcolors.ENDC)
+def		alert(str):
+	print (bcolors.FAIL + ">>> " + str + " <<<" + bcolors.ENDC)
 	return
 
 print("\nUnit test")
 
 print("Find from CLI: wrong formatting (error expected):")
 for n in wrong_formats:
-	cmd = "python3 bmp_matrix.py \"" + n + "\""
+	cmd = "python3 main.py \"" + n + "\""
 	print("`" + cmd + "`", end = " ", flush = True)
 	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
 	except:	test = "OK"
@@ -92,14 +92,14 @@ exit()
 
 print("Find from CLI: plain list:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	cmd = "python3 main.py " + str(n) + ""
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
 	print(" >>", test)
 
 print("Find from CLI: plain list, no brackets:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "")
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
@@ -107,7 +107,7 @@ for n in test_needle:
 
 print("Find from CLI: plain list, no brackets, no comma:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py " + str(n) + ""
+	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
@@ -115,14 +115,14 @@ for n in test_needle:
 
 print("Find from CLI: in string list (json):")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	cmd = "python3 main.py \"" + str(n) + "\""
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
 	print(" >>", test)
 
 print("Find from CLI: plain list, no brackets:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "")
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')
@@ -130,7 +130,7 @@ for n in test_needle:
 
 print("Find from CLI: plain list, no brackets, no comma:")
 for n in test_needle:
-	cmd = "python3 bmp_matrix.py \"" + str(n) + "\""
+	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
 	print("`" + cmd + "`", end = "")
 	test = subprocess.check_output(cmd.split()).decode('utf-8')

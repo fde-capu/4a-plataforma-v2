@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from bmp_matrix import *
+from main import *
 import json
 import re
 

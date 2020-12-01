@@ -10,12 +10,12 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 
 `cd ex1` :: Use: 
 
-- `python3 bmp_matrix.py [1, 2, 3]`
-- `python3 bmp_matrix.py 1, 2, 3`
-- `python3 bmp_matrix.py 1 2 3`
-- `python3 bmp_matrix.py "[1, 2, 3]"`
-- `python3 bmp_matrix.py "1, 2, 3"`
-- `python3 bmp_matrix.py "1 2 3"`
+- `python3 main.py [1, 2, 3]`
+- `python3 main.py 1, 2, 3`
+- `python3 main.py 1 2 3`
+- `python3 main.py "[1, 2, 3]"`
+- `python3 main.py "1, 2, 3"`
+- `python3 main.py "1 2 3"`
 - `make unit` para rodar testes.
 
 	(Aspas duplas `""` e simples `''` são aceitas.)
