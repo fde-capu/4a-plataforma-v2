@@ -24,10 +24,12 @@ def	validate_or_die(vec):
 	return vec_full
 
 if len(sys.argv) != 1:
-	vector = validate_or_die(sys.argv[1:]);
+	vector = validate_or_die(sys.argv[1:])
 	if not re.compile("\[|\]").search(vector):
 		vector = "[" + vector + "]"
 	count = count_vector_in_file(vector)
+	if count == "":
+		sys.exit("Empty response.")
 	print(count, end = "")
 else:
-	print("", end = "")
+	print("Read the README.md file.")
