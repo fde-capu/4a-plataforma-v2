@@ -38,7 +38,7 @@ vector_lengths = [-2, 0, 1, 2, 3, 7, 4]
 
 test_needle = [ \
 	[3], \
-	[5, 7], \
+	[[5, 7]], \
 	[0, 4, 4], \
 	[5, -1, 7], \
 	[1, 0, 15], \
@@ -47,79 +47,48 @@ test_needle = [ \
 	[7, 5], \
 	[] \
 	]
+wrong_formats = [ \
+	"o 4 4", \
+	"[[2, 5]]", \
+	"[5, , 7]", \
+	"[7 9, 1", \
+	"5 ] 2", \
+	"[ 5 , [ 7 ]", \
+	"7 9, 1", \
+	"", \
+]
 
 # # #
 
 g_not_silent = 0
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 # # #
 
+def alert(str):
+	print (bcolors.WARNING + ">>> " + str + " <<<" + bcolors.ENDC)
+	return
+
 print("\nUnit test")
 
-print ("\nLoading local bitmap (no error expected). Raw.")
-local_bmp = bmp(json.loads(json_input_bmp), g_not_silent)
-local_bmp_other = bmp(json.loads(json_input_bmp_other), g_not_silent)
-print (" Done.")
+print("Find from CLI: wrong formatting (error expected):")
+for n in wrong_formats:
+	cmd = "python3 bmp_matrix.py \"" + n + "\""
+	print("`" + cmd + "`", end = " ", flush = True)
+	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
+	except:	test = "OK"
+	else:	alert(test)
 
-print ("Try inconsistend matrix:")
-local_inconsistent = bmp(json.loads(json_inconsistent_bmp), g_not_silent)
-print (" Done.")
-
-print ("\nLoading local vector needle (no error expected). Raw.")
-local_vec = needle(json.loads(json_input_vec), g_not_silent)
-print (" Done.\n")
-
-print ("Load empty vector:", needle([]), "done.\n")
-
-for t in test_get_element:
-	element = local_bmp.element(t)
-	print("Test get element (x, y) = " + op.xtoa(t) + ": " \
-		+ op.xtoa(element))
-print ("Done.\n")
-
-for l in vector_lengths:
-	for t in test_get_element:
-		vec = local_bmp.get_vector_at_x_y(t, l)
-		print("Get vector at " + op.xtoa(t) + ",\tlength " \
-			+ op.xtoa(l) + "\t" + op.xtoa(vec))
-print ("Done.\n")
-
-for n in test_needle:
-	print("Init vector " + op.xtoa(n) + ". ", end = "")
-	t_needle = needle(n)
-	print (op.xtoa(t_needle))
-print ("Done.\n")
-
-print("Vector compare:")
-for n in test_needle:
-	print("vector " + op.xtoa(n) + ". ", end = "")
-	print("found" if vector_compare(n, n) else "-", end = "")
-	print("found" if vector_compare(n, [1, 0, 15]) else "-")
-print ("Done.\n")
-
-print("Find vector in bmp:")
-print(str(local_bmp), ":::")
-for n in test_needle:
-	print(n, " -> ", end = " ")
-	print(find_vector_in_bmp(needle(n), local_bmp))
-
-print("Find vector in bmp_other:")
-print(str(local_bmp_other), ":::")
-for n in test_needle:
-	print(n, " -> ", end = " ")
-	print(find_vector_in_bmp(needle(n), local_bmp_other))
-
-print("Find from json inputs:")
-print(" ::: \n", json_input_vec, "\n ::: \n", json.loads(json_input_bmp))
-print("==>", find_vector_in_bmp_json(json_input_vec, json_input_bmp))
-print("==>", count_vector_in_matrix(json_input_vec, json_input_bmp))
-print(" ::: \n", json_input_vec, "\n ::: \n", json.loads(json_input_bmp_other))
-print("==>", find_vector_in_bmp_json(json_input_vec, json_input_bmp_other))
-print("==>", count_vector_in_matrix(json_input_vec, json_input_bmp_other))
-
-print("Find from file:")
-print(" ::: ", json_input_vec, " :::")
-print("==>", count_vector_in_file(json_input_vec))
+exit()
 
 print("Find from CLI: plain list:")
 for n in test_needle:

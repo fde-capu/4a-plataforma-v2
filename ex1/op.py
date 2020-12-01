@@ -1,7 +1,6 @@
 # # #
 # # # helper operations for
 # # # find a vector in a bitmap . fde-capu . 2012
-# # # written for Python 3.7.3
 # # #
 
 class	op():
