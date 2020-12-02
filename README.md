@@ -16,7 +16,7 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 - `python3 main.py "[1, 2, 3]"`
 - `python3 main.py "1, 2, 3"`
 - `python3 main.py "1 2 3"`
-- `make unit` para rodar testes.
+- `unit_test.sh` para rodar testes.
 
 	(Aspas duplas `""` e simples `''` são aceitas.)
 
