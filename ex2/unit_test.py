@@ -35,8 +35,18 @@ answ_needle = [ \
 	3, \
 ]
 
-wrongs = [ \
+wrong_formats = [ \
+	"o 4 4", \
+	"[[2, 5]]", \
+	"[5, , 7]", \
+	"[7 9, 1", \
+	"5 ] 2", \
+	[7, 8, 16], \
+	"[ 5 , [ 7 ]", \
+	[5, -1, 7], \
+	[[5, 7]], \
 	[], \
+	"[]", \
 ]
 
 # # #
@@ -61,9 +71,9 @@ def		alert(str):
 
 print("\nUnit test")
 
-print("\nFind from CLI: in string list (json):")
+print("\nFind json:")
 for i, n in enumerate(test_needle):
-	test = ""
+	test = ''
 	nn = str(n)
 	cmd = "curl -sd \"" + nn + "\" localhost:5000"
 	print("`" + cmd + "`", end = " ", flush = True)
@@ -73,3 +83,15 @@ for i, n in enumerate(test_needle):
 		print(" >>", test)
 	else:
 		alert("Fail: " + str(answ_needle[i]) + ": got " + str(test))
+
+print("\nWrong fromats::")
+for i, n in enumerate(wrong_formats):
+	test = '' 
+	nn = str(n)
+	cmd = "curl -sd \"" + nn + "\" localhost:5000"
+	print("`" + cmd + "`", end = " ", flush = True)
+	test = json.loads(subprocess.check_output(['curl', '-sd', nn, 'localhost:5000']).decode('utf-8'))
+	if str(0) == test:
+		print(" >>", test)
+	else:
+		alert("Fail, got " + str(test))

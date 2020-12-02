@@ -25,8 +25,8 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 :: Use:
 
 - `setup.sh`: cria um container escutando a porta 5000.
-- `test.sh`: faz algumas chamadas `curl` no modelo `curl -d "[2, 5, 7]" localhost:5000`. A string referência deve ser um json válido.
 - `login.sh`: efetual login root no container, via Docker.
+- `python3 unit_test.py` para rodar testes.
 
 ### Ex 3. Faça algumas estatísticas de uma corrida de super-heróis.
 

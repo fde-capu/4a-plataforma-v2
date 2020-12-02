@@ -1,6 +1,5 @@
 # # #
-# # # helper operations for
-# # # find a vector in a bitmap . fde-capu . 2012
+# # # count a vector in a bitmap . fde-capu . 2012
 # # #
 
 class	op():

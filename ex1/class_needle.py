@@ -12,15 +12,12 @@ class	needle_init(object):
 	def __init__(self, vector):
 		self.m = 0
 		self.vector = []
+		self.fail = 0
 		try:
 			if len(vector) == 0:
 				raise AttributeError
 		except AttributeError:
-			sys.exit("Vector is empty.")
+			self.fail = 1
 		else:
 			self.vector = np.array(vector)
 			self.m = len(self.vector)
-	def __str__(self):
-		return self.show_me()
-	def show_me(self):
-		return str(self.vector)

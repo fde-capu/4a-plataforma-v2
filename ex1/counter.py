@@ -8,12 +8,12 @@ from class_needle import *
 from class_matrix import *
 
 def	count_vector_in_file(vector):
-	ref_file = "/app/bitmap.json"
+	ref_file = '/app/bitmap.json'
 	try:
 		with open(ref_file) as file:
 			fullstr = file.read()
 	except:
-		ref_file = ref_file.replace("/app/", "")
+		ref_file = ref_file.replace('/app/', '')
 		with open(ref_file) as file:
 			fullstr = file.read()
 	return count_vector_in_matrix(vector, fullstr)
@@ -39,7 +39,10 @@ def find_vector_in_bmp(needle, bitmap):
 	return found
 
 def find_vector_in_bmp_json(json_vector, json_matrix):
-	return find_vector_in_bmp( \
-		needle_init(np.array(json.loads(json_vector))), \
-		matrix_init(np.array(json.loads(json_matrix))) \
-		)
+	needle = needle_init(np.array(json.loads(json_vector)))
+	if needle.fail:
+		return 0
+	haystack = 	matrix_init(np.array(json.loads(json_matrix)))
+	if haystack.fail:
+		return 0
+	return find_vector_in_bmp(needle, haystack)
