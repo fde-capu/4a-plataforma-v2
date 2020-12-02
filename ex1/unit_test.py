@@ -98,6 +98,7 @@ for i, n in enumerate(test_needle):
 
 print("\nFind from CLI: plain list, no brackets:")
 for i, n in enumerate(test_needle):
+	test = ""
 	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "")
 	print("`" + cmd + "`", end = " ", flush = True)
@@ -110,6 +111,7 @@ for i, n in enumerate(test_needle):
 
 print("\nFind from CLI: plain list, no brackets, no comma:")
 for i, n in enumerate(test_needle):
+	test = ""
 	cmd = "python3 main.py " + str(n) + ""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
 	print("`" + cmd + "`", end = " ", flush = True)
@@ -122,6 +124,7 @@ for i, n in enumerate(test_needle):
 
 print("\nFind from CLI: in string list (json):")
 for i, n in enumerate(test_needle):
+	test = ""
 	cmd = "python3 main.py \"" + str(n) + "\""
 	print("`" + cmd + "`", end = " ", flush = True)
 	try:	test = subprocess.check_output(cmd.split()).decode('utf-8')
@@ -133,6 +136,7 @@ for i, n in enumerate(test_needle):
 
 print("\nFind from CLI: plain list, no brackets:")
 for i, n in enumerate(test_needle):
+	test = ""
 	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "")
 	print("`" + cmd + "`", end = " ", flush = True)
@@ -145,6 +149,7 @@ for i, n in enumerate(test_needle):
 
 print("\nFind from CLI: plain list, no brackets, no comma:")
 for i, n in enumerate(test_needle):
+	test = ""
 	cmd = "python3 main.py \"" + str(n) + "\""
 	cmd = cmd.replace("[", "").replace("]", "").replace(",", "")
 	print("`" + cmd + "`", end = " ", flush = True)

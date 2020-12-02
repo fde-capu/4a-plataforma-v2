@@ -16,7 +16,7 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 - `python3 main.py "[1, 2, 3]"`
 - `python3 main.py "1, 2, 3"`
 - `python3 main.py "1 2 3"`
-- `unit_test.sh` para rodar testes.
+- `python3 unit_test.py` para rodar testes.
 
 	(Aspas duplas `""` e simples `''` são aceitas.)
 
@@ -25,7 +25,7 @@ O arquivo `bitmap.json` deve conter a matriz de referência.
 :: Use:
 
 - `setup.sh`: cria um container escutando a porta 5000.
-- `test.sh`: faz algumas chamadas `curl` no modelo `curl -d "2 5 7" localhost:5000`. A string referência pode ter as mesmas variações que no Ex. 1.
+- `test.sh`: faz algumas chamadas `curl` no modelo `curl -d "[2, 5, 7]" localhost:5000`. A string referência deve ser um json válido.
 - `login.sh`: efetual login root no container, via Docker.
 
 ### Ex 3. Faça algumas estatísticas de uma corrida de super-heróis.
